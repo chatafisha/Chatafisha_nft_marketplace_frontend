@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import 'regenerator-runtime/runtime';
+import React, { useEffect } from 'react';
+import CustomHeader from './common/Header';
+import CustomFooter from './common/Footer';
+import { wallet } from '.';
+import { useDispatch } from 'react-redux';
+import { updateUserAccountId } from './redux/reducer/commonReducer';
+import MyRoutes from './routers/routes';
 
-function App() {
+export function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    wallet
+      .startUp()
+      .then((value) => {
+        dispatch(updateUserAccountId(value.accountId));
+      })
+      .catch(() => {
+        dispatch(updateUserAccountId(false));
+      });
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <MyRoutes />
+    </>
   );
 }
-
-export default App;
