@@ -22,7 +22,7 @@ const Header = () => {
         data-aos-delay={800}
         className="navbar navbar-expand"
       >
-        <div className="container header mt-4">
+        <div className="container header pt-4">
           {/* Navbar Brand*/}
           <a className="navbar-brand" href="/">
             <img
