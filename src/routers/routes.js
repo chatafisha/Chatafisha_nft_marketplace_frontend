@@ -10,8 +10,6 @@ import Contact from '../pages/Contact';
 import Create from '../pages/Create';
 import CreateMsg from '../pages/CreateMsg';
 import NFTclaims from '../pages/NFTclaims';
-import { useSelector } from 'react-redux';
-import { ReducerNames } from '../utils/constants';
 import PrivateRoute from './PrivateRoute';
 import Header from '../common/Header';
 
@@ -27,7 +25,6 @@ const Wrapper = ({ children }) => {
 };
 
 const MyRoutes = () => {
-  const { userAccountId } = useSelector((state) => state[ReducerNames.COMMON]);
   return (
     <div>
       <Router>
@@ -85,24 +82,45 @@ const MyRoutes = () => {
               </Wrapper>
             }
           />
-          {/* <PrivateRoute
+          <Route
             exact
             path="/create"
-            element={Create}
-            accountId={userAccountId}
+            element={
+              <PrivateRoute
+                component={
+                  <Wrapper>
+                    <Create />
+                  </Wrapper>
+                }
+              />
+            }
           />
-          <PrivateRoute
+          <Route
             exact
             path="/create-msg/:type"
-            element={CreateMsg}
-            accountId={userAccountId}
+            element={
+              <PrivateRoute
+                component={
+                  <Wrapper>
+                    <CreateMsg />
+                  </Wrapper>
+                }
+              />
+            }
           />
-          <PrivateRoute
+          <Route
             exact
             path="/nft-claims"
-            element={NFTclaims}
-            accountId={userAccountId}
-          /> */}
+            element={
+              <PrivateRoute
+                component={
+                  <Wrapper>
+                    <NFTclaims />
+                  </Wrapper>
+                }
+              />
+            }
+          />
         </Routes>
       </Router>
     </div>

@@ -1,28 +1,21 @@
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ReducerNames } from '../utils/constants';
 
-const PrivateRoute = ({ component: Component, accountId, ...rest }) => {
+const PrivateRoute = ({ component }) => {
   const { userAccountId } = useSelector((state) => state[ReducerNames.COMMON]);
   const allowedAccountIds = [
     'chatafisha_marketplace.near',
     'chatafisha_nft_marketplace.testnet',
   ];
-  // Allowed accountId
-
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        allowedAccountIds.includes(userAccountId) ? (
-          <Component {...props} />
-        ) : (
-          <Navigate to="/" />
-        )
-      }
-    />
+  if (userAccountId === false) {
+    return <></>;
+  }
+  return allowedAccountIds.includes(userAccountId) ? (
+    component
+  ) : (
+    <Navigate to="/" />
   );
 };
-
 export default PrivateRoute;

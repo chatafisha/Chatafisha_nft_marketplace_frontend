@@ -1,13 +1,13 @@
-import React, { Component, useEffect, useState } from "react";
-import axios from "axios";
-import styles from "./styles.module.css";
+import React, { Component, useEffect, useState } from 'react';
+import axios from 'axios';
+import styles from './styles.module.css';
 
 const itemsPerPage = 10; // Number of items to display per page
 
 const NFTS = () => {
   const [collections, setCollections] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [filteredCollections, setFilteredCollections] = useState([]); // Define filteredCollections state
 
   // Fetch data and filter logic
@@ -15,7 +15,7 @@ const NFTS = () => {
     const getColls = async () => {
       try {
         const response = await axios.get(
-          "https://marketplace.chatafisha.com:5000/nfts/"
+          'https://marketplace.chatafisha.com:5000/nfts/'
         );
         setCollections(response.data);
         console.log(response);
@@ -89,7 +89,7 @@ const NFTS = () => {
                 <td className={styles.td}>{item.kgs}</td>
                 <td className={styles.td}>{item.date}</td>
                 <td className={styles.td}>
-                  <div className={styles["image-container"]}>
+                  <div className={styles['image-container']}>
                     <img
                       className={styles.image}
                       src={item.image}

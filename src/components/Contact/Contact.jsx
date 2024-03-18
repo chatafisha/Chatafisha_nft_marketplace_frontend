@@ -75,9 +75,9 @@ const Contact = () => {
   ];
 
   const sendEmail = async (formElement) => {
-    const serviceId = 'service_f3uj7rh'; // Your EmailJS service ID
-    const templateId = 'template_8ktfs7k'; // Your EmailJS template ID
-    const userId = 'DUtTwel3hKZrkWvOX'; // Your EmailJS user ID
+    const serviceId = process.env.REACT_APP_EMAIL_SERVICE_ID; // Your EmailJS service ID
+    const templateId = process.env.REACT_APP_EMAIL_TEMPLATE_ID; // Your EmailJS template ID
+    const userId = process.env.REACT_APP_EMAIL_USER_ID; // Your EmailJS user ID
 
     // Create an HTML form element
     const form = document.createElement('form');
@@ -96,7 +96,7 @@ const Contact = () => {
     // Append the form to the body
     document.body.appendChild(form);
 
-    emailjs.sendForm(serviceId, templateId, form, userId).then(
+    emailjs.sendForm(serviceId, templateId, form).then(
       (response) => {
         console.log('Email sent successfully:', response);
       },
