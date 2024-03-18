@@ -21,6 +21,7 @@
     "@emailjs/browser": "^4.3.3",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
+    "@mintbase-js/wallet": "^0.5.9-beta.0",
     "@near-wallet-selector/default-wallets": "^8.1.4",
     "@near-wallet-selector/here-wallet": "^8.9.5",
     "@near-wallet-selector/ledger": "^8.9.5",

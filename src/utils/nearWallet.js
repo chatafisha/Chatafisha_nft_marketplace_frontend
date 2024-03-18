@@ -18,6 +18,7 @@ import { setupSender } from '@near-wallet-selector/sender';
 import senderIconUrl from '@near-wallet-selector/sender/assets/sender-icon.png';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import HereWalletIconUrl from '@near-wallet-selector/here-wallet/assets/here-wallet-icon.png';
+import { setupMintbaseWallet } from '@mintbase-js/wallet';
 import { getConfig } from './networkConfig';
 
 const { networkId, contractName, marketContractName } = getConfig();
@@ -33,6 +34,13 @@ const connectionConfig = {
 
 const sender = setupSender({
   iconUrl: senderIconUrl,
+});
+
+const mintbaseWallet = setupMintbaseWallet({
+  networkId: networkId,
+  walletUrl: 'https://wallet.mintbase.xyz',
+  callbackUrl: 'https://www.mywebsite.com',
+  deprecated: false,
 });
 
 const hereWallet = setupHereWallet({
@@ -82,6 +90,7 @@ export class Wallet {
         setupLedger({ iconUrl: LedgerIconUrl }),
         sender,
         hereWallet,
+        mintbaseWallet,
       ],
     });
 
