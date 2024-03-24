@@ -57,7 +57,7 @@ const MyRoutes = () => {
             }
           />
           <Route
-            path="/item-details/:type"
+            path="/item-details/:id"
             element={
               <Wrapper>
                 <ItemDetails />

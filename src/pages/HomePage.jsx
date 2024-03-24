@@ -46,12 +46,6 @@ const HomePage = () => {
       <Hero />
       {/* <Auctions /> */}
       {/* <TopSeller /> */}
-      {collectionData.length !== 0 ? (
-        <Collections collection={collectionData} />
-      ) : (
-        <div></div>
-      )}
-
       <ExploreThree tokens={tokens} />
       {/* <Work /> */}
       <Footer />

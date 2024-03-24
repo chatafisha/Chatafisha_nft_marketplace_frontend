@@ -57,7 +57,7 @@ function Create() {
           //   });
           await axios
             .put(
-              `https://marketplace.chatafisha.com:5000/nfts/update-status/${values.code}`
+              `https://chatafisha-backend.netlify.app/.netlify/functions/api/update-status/${values.code}`
             )
             .then((res) => {
               console.log(res.data);

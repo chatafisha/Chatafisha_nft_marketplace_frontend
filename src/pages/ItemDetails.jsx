@@ -17,23 +17,20 @@ import { wallet } from '..';
 const ItemDetails = () => {
   const { userAccountId } = useSelector((state) => state[ReducerNames.COMMON]);
   const [nft, setNft] = useState(null);
-  const { type } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
-  const stateParamVal = useLocation();
-  const itemData = JSON.parse(decodeURIComponent(type));
+  const tokenId = id.split('=')[1];
   useEffect(() => {
-    console.log(JSON.parse(decodeURIComponent(type)));
-    console.log(stateParamVal);
     if (window.location.search.includes('transactionHashes')) {
       window.location.href = '/transfer-msg/succeeded';
     }
+
     axios
       .get(
-        `https://marketplace.chatafisha.com:5000/nfts/find/${itemData.token_id}`
+        `https://chatafisha-backend.netlify.app/.netlify/functions/api/find/${tokenId}`
       )
       .then((res) => {
         setNft(res.data);
-        // console.log(nft);
       })
       .catch((err) => {
         console.log(err);
@@ -52,7 +49,7 @@ const ItemDetails = () => {
       wallet
         .transferNft({
           receiverId: values.address,
-          tokenId: itemData.metadata.title,
+          tokenId: tokenId,
         })
         .then((res) => {
           console.log(res);
@@ -73,7 +70,7 @@ const ItemDetails = () => {
             <div className="col-12 col-lg-5">
               <div className="item-info">
                 <div className="item-thumb text-center">
-                  <img src={itemData.metadata.media} alt="" />
+                  <img src={nft?.media} alt="" />
                 </div>
                 <div className="card no-hover countdown-times my-4">
                   {nft && (
@@ -95,17 +92,17 @@ const ItemDetails = () => {
             <div className="col-12 col-lg-6">
               {/* Content */}
               <div className="content mt-5 mt-lg-0">
-                <h3 className="m-0">{itemData.metadata.title}</h3>
-                <p>{itemData.metadata.description}</p>
+                <h3 className="m-0">{nft?.name}</h3>
+                <p>{nft?.description}</p>
                 {/* Owner */}
                 <div className="owner d-flex align-items-center">
                   <span>Owned By</span>
                   <a
                     className="owner-meta d-flex align-items-center ml-3"
-                    key={itemData.owner_id}
+                    key={nft?.owner_id}
                     href=""
                   >
-                    <h6 className="ml-2">{itemData.owner_id}</h6>
+                    <h6 className="ml-2">{nft?.owner_id}</h6>
                   </a>
                 </div>
                 {/* Item Info List */}
@@ -148,7 +145,7 @@ const ItemDetails = () => {
                       </li>
                     </ul>
                   </div> */}
-                {itemData.owner_id == userAccountId && (
+                {nft?.owner_id == userAccountId && (
                   <form
                     onSubmit={formikTransfer.handleSubmit}
                     className="item-form card no-hover"

@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './styles.module.css';
+import PaginationComponent from '../../common/Pagination';
 
 const itemsPerPage = 10; // Number of items to display per page
 
@@ -15,7 +16,7 @@ const NFTS = () => {
     const getColls = async () => {
       try {
         const response = await axios.get(
-          'https://marketplace.chatafisha.com:5000/nfts/'
+          'https://chatafisha-backend.netlify.app/.netlify/functions/api'
         );
         setCollections(response.data);
         console.log(response);
@@ -44,7 +45,7 @@ const NFTS = () => {
     indexOfFirstItem,
     indexOfLastItem
   );
-  const sortedItems = collections
+  const sortedItems = currentItems
     .slice() // Create a shallow copy of the array to avoid mutating the original array
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -106,18 +107,11 @@ const NFTS = () => {
 
         {/* Pagination */}
         <div className={styles.pagination}>
-          {Array.from(
-            { length: Math.ceil(filteredCollections.length / itemsPerPage) },
-            (_, index) => (
-              <button
-                key={index + 1}
-                className={styles.paginationButton}
-                onClick={() => paginate(index + 1)}
-              >
-                {index + 1}
-              </button>
-            )
-          )}
+          <PaginationComponent
+            itemsPerPage={itemsPerPage}
+            totalItems={filteredCollections.length}
+            paginate={paginate}
+          />
         </div>
       </div>
     </div>

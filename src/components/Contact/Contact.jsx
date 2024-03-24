@@ -62,9 +62,6 @@ const Contact = () => {
     return await (timestamp + randomString).toUpperCase();
   }
 
-  //   sgMail.setApiKey(
-  //     "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"
-  //   );
   const typesOfWaste = [
     'Polycarbonate (PC)',
     'Polyethylene (PE)',
@@ -74,26 +71,25 @@ const Contact = () => {
     'Acrylonitrile-Butadiene-Styrene (ABS)',
   ];
 
-  const sendEmail = async (formElement) => {
-    const serviceId = process.env.REACT_APP_EMAIL_SERVICE_ID; // Your EmailJS service ID
-    const templateId = process.env.REACT_APP_EMAIL_TEMPLATE_ID; // Your EmailJS template ID
-    const userId = process.env.REACT_APP_EMAIL_USER_ID; // Your EmailJS user ID
-
+  const sendEmail = async (data) => {
+    const serviceId = process.env.REACT_APP_EMAIL_SERVICE_ID;
+    const templateId = process.env.REACT_APP_EMAIL_TEMPLATE_ID;
+    const publicId = process.env.REACT_APP_PUBLIC_KEY;
+    emailjs.init(publicId);
     // Create an HTML form element
     const form = document.createElement('form');
     form.style.display = 'none'; // Hide the form
 
     // Append fields to the form
-    for (const key in formElement) {
-      if (formElement.hasOwnProperty(key)) {
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
         const input = document.createElement('input');
         input.name = key;
-        input.value = formElement[key];
+        input.value = data[key];
         form.appendChild(input);
       }
     }
 
-    // Append the form to the body
     document.body.appendChild(form);
 
     emailjs.sendForm(serviceId, templateId, form).then(
@@ -119,9 +115,7 @@ const Contact = () => {
       date: '',
     },
     onSubmit: async (values, actions) => {
-      console.log(values);
       const code = await generateUniqueID();
-      console.log('code : ' + code);
 
       const nftData = new FormData();
       nftData.append('code', code);
@@ -139,29 +133,10 @@ const Contact = () => {
       nftData.append('kgs', values.kgs + '');
       nftData.append('date', new Date().toString());
       nftData.append('status', 'pending');
-
-      const formData = {
-        code: code,
-        image: image,
-        name: values.name,
-        email: values.email,
-        accountid: userAccountId,
-        description: values.description,
-        typeofwaste:
-          values.typeOfWaste == 'other : '
-            ? `other : ${formikContact.values.other}`
-            : values.typeOfWaste,
-        kgs: values.kgs + '',
-        date: new Date().toString(),
-        status: 'pending',
-      };
-
-      await sendEmail(formData);
-
       try {
         await axios
           .post(
-            'https://marketplace.chatafisha.com:5000/nfts/create',
+            'https://chatafisha-backend.netlify.app/.netlify/functions/api/create',
             nftData,
             {
               headers: {
@@ -169,8 +144,9 @@ const Contact = () => {
               },
             }
           )
-          .then((res) => {
+          .then(async (res) => {
             console.log(res.data);
+            await sendEmail(res.data); // get the image uploaded URL
             toast.success('Data submitted successfully!');
           })
           .catch((err) => {
@@ -181,7 +157,6 @@ const Contact = () => {
         console.log(err);
         toast.error('An error occurred!');
       }
-
       actions.resetForm();
       // window.location = "/claim-nft";
     },

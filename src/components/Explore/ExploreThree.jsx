@@ -35,77 +35,27 @@ const ExploreThree = ({ tokens }) => {
                 >
                   <div className="card h-100">
                     <div className="image-cover">
-                      <Link
-                        to={`/item-details/${encodeURIComponent(
-                          JSON.stringify(item)
-                        )}`}
-                        onClick={() => {
-                          handleLinkClick(
-                            `/item-details/${encodeURIComponent(
-                              JSON.stringify(item)
-                            )}`
-                          );
-                        }}
-                        state={{ stateParam: item }}
-                      >
-                        <img
-                          className="card-img-top img-fluid"
-                          src={item.metadata.media}
-                          alt=""
-                          style={{ height: '200px', objectFit: 'cover' }}
-                        />
-                      </Link>
+                      <img
+                        className="card-img-top img-fluid"
+                        src={item.metadata.media}
+                        alt=""
+                        style={{ height: '200px', objectFit: 'cover' }}
+                      />
                     </div>
                     {/* Card Caption */}
                     <div className="card-caption col-12 p-0">
                       {/* Card Body */}
                       <div className="card-body">
-                        <Link
-                          to={`/item-details/${encodeURIComponent(
-                            JSON.stringify(item)
-                          )}`}
-                          onClick={() => {
-                            handleLinkClick(
-                              `/item-details/${encodeURIComponent(
-                                JSON.stringify(item)
-                              )}`
-                            );
-                          }}
-                          state={{ stateParam: item }}
-                        >
-                          <h5 className="mb-0">{item.metadata.title}</h5>
-                        </Link>
+                        <h5 className="mb-0">{item.metadata.title}</h5>
+
                         <div className="seller d-flex align-items-center my-3">
                           <span>Owned By</span>
-                          <Link
-                            to={`/item-details/${encodeURIComponent(
-                              JSON.stringify(item)
-                            )}`}
-                            onClick={() => {
-                              handleLinkClick(
-                                `/item-details/${encodeURIComponent(
-                                  JSON.stringify(item)
-                                )}`
-                              );
-                            }}
-                            state={{ stateParam: item }}
-                          >
-                            <h6 className="ml-2 mb-0">{item.owner_id}</h6>
-                          </Link>
+
+                          <h6 className="ml-2 mb-0">{item.owner_id}</h6>
                         </div>
 
                         <Link
-                          to={`/item-details/${encodeURIComponent(
-                            JSON.stringify(item)
-                          )}`}
-                          onClick={() => {
-                            handleLinkClick(
-                              `/item-details/${encodeURIComponent(
-                                JSON.stringify(item)
-                              )}`
-                            );
-                          }}
-                          state={{ stateParam: item }}
+                          to={`/item-details/id=${item.token_id}`}
                           className="btn btn-bordered-white btn-smaller mt-3"
                         >
                           <i className="icon-rocket mr-2" />

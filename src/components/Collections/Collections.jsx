@@ -55,15 +55,9 @@ const Collections = ({ collection }) => {
                   <div className="card no-hover text-center h-100">
                     <div className="image-cover">
                       <Link
-                        to={`/item-details/${encodeURIComponent(
-                          JSON.stringify(item)
-                        )}`}
+                        to={`/item-details/id=${item.token_id}`}
                         onClick={() => {
-                          handleLinkClick(
-                            `/item-details/${encodeURIComponent(
-                              JSON.stringify(item)
-                            )}`
-                          );
+                          handleLinkClick(`/item-details/id=${item.token_id}}`);
                         }}
                         state={{ stateParam: item }}
                       >
@@ -80,14 +74,10 @@ const Collections = ({ collection }) => {
                       {/* Card Body */}
                       <div className="card-body mt-4">
                         <Link
-                          to={`/item-details/${encodeURIComponent(
-                            JSON.stringify(item)
-                          )}`}
+                          to={`/item-details/id=${item.token_id}`}
                           onClick={() => {
                             handleLinkClick(
-                              `/item-details/${encodeURIComponent(
-                                JSON.stringify(item)
-                              )}`
+                              `/item-details/id=${item.token_id}`
                             );
                           }}
                           state={{ stateParam: item }} // Pass the item data as the state
@@ -98,15 +88,9 @@ const Collections = ({ collection }) => {
                       </div>
 
                       <Link
-                        to={`/item-details/${encodeURIComponent(
-                          JSON.stringify(item)
-                        )}`}
+                        to={`/item-details/id=${item.token_id}`}
                         onClick={() => {
-                          handleLinkClick(
-                            `/item-details/${encodeURIComponent(
-                              JSON.stringify(item)
-                            )}`
-                          );
+                          handleLinkClick(`/item-details/id=${item.token_id}`);
                         }}
                         state={{ stateParam: item }}
                         className="btn btn-bordered-white btn-smaller mt-3"
