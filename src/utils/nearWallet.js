@@ -117,7 +117,7 @@ export class Wallet {
       modal.on('onHide', async (event) => {
         if (event.hideReason === 'wallet-navigation') {
           const isSignedIn = await this.updateLogInState();
-          resolve(isSignedIn); // Resolve the promise when the sign-in process is complete
+          resolve({ isSignedIn: isSignedIn, accountId: this.accountId }); // Resolve the promise when the sign-in process is complete
         }
       });
     });

@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { wallet } from '..';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReducerNames } from '../utils/constants';
+import { updateUserAccountId } from '../redux/reducer/commonReducer';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const adminAccounts = [
     'chatafisha_marketplace.near',
     'chatafisha_nft_marketplace.testnet',
   ];
   const { userAccountId } = useSelector((state) => state[ReducerNames.COMMON]);
 
-  const signIn = async () => await wallet.signIn();
+  const signIn = async () => {
+    const res = await wallet.signIn();
+    dispatch(updateUserAccountId(res.accountId));
+  };
 
-  const signOut = async () => await wallet.signOut();
+  const signOut = async () => {
+    await wallet.signOut();
+    dispatch(updateUserAccountId(null));
+  };
 
   return (
     <header id="header">
