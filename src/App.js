@@ -1,7 +1,5 @@
 import 'regenerator-runtime/runtime';
 import React, { useEffect } from 'react';
-import CustomHeader from './common/Header';
-import CustomFooter from './common/Footer';
 import { wallet } from '.';
 import { useDispatch } from 'react-redux';
 import { updateUserAccountId } from './redux/reducer/commonReducer';

@@ -1,11 +1,6 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Hero from '../components/Hero/Hero';
-import Collections from '../components/Collections/Collections';
-import Footer from '../components/Footer/Footer';
-import ModalSearch from '../components/Modal/ModalSearch';
-import ModalMenu from '../components/Modal/ModalMenu';
-import Scrollup from '../components/Scrollup/Scrollup';
 import ExploreThree from '../components/Explore/ExploreThree';
 import { ReducerNames } from '../utils/constants';
 import { wallet } from '..';
@@ -48,10 +43,6 @@ const HomePage = () => {
       {/* <TopSeller /> */}
       <ExploreThree tokens={tokens} />
       {/* <Work /> */}
-      <Footer />
-      <ModalSearch />
-      <ModalMenu />
-      <Scrollup />
     </div>
   );
 };

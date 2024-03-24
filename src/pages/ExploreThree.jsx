@@ -1,13 +1,7 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
-import Explore from '../components/Explore/ExploreFour';
-import Footer from '../components/Footer/Footer';
-import ModalSearch from '../components/Modal/ModalSearch';
-import ModalMenu from '../components/Modal/ModalMenu';
-import Scrollup from '../components/Scrollup/Scrollup';
 import ExploreThree from '../components/Explore/ExploreThree';
-import { Link } from 'react-router-dom';
 import { wallet } from '..';
 
 const initData = {
@@ -61,10 +55,6 @@ const ExploreThreee = () => {
       ) : (
         <div> No tokens found</div>
       )}
-      <Footer />
-      <ModalSearch />
-      <ModalMenu />
-      <Scrollup />
     </div>
   );
 };

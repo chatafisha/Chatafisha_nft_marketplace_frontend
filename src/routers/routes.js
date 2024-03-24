@@ -12,6 +12,10 @@ import CreateMsg from '../pages/CreateMsg';
 import NFTclaims from '../pages/NFTclaims';
 import PrivateRoute from './PrivateRoute';
 import Header from '../common/Header';
+import Footer from '../components/Footer/Footer';
+import ModalSearch from '../components/Modal/ModalSearch';
+import ModalMenu from '../components/Modal/ModalMenu';
+import Scrollup from '../components/Scrollup/Scrollup';
 
 const Wrapper = ({ children }) => {
   return (
@@ -20,6 +24,10 @@ const Wrapper = ({ children }) => {
       {/* <ProgressTracker /> */}
       <Header />
       {children}
+      <Footer />
+      <ModalSearch />
+      <ModalMenu />
+      <Scrollup />
     </>
   );
 };

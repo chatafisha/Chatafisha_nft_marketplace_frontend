@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Header from '../common/Header';
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import SignupSection from '../components/Signup/Signup';
-import Footer from '../components/Footer/Footer';
-import ModalSearch from '../components/Modal/ModalSearch';
-import ModalMenu from '../components/Modal/ModalMenu';
-import Scrollup from '../components/Scrollup/Scrollup';
 
 const Signup = () => {
   return (
@@ -14,10 +10,6 @@ const Signup = () => {
       <Header />
       <Breadcrumb title="Signup" subpage="Pages" page="Signup" />
       <SignupSection />
-      <Footer />
-      <ModalSearch />
-      <ModalMenu />
-      <Scrollup />
     </div>
   );
 };

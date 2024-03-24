@@ -1,16 +1,9 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from '../common/Header';
 import Hero from '../components/Hero/Hero';
-import Auctions from '../components/Auctions/AuctionsOne';
-import TopSeller from '../components/TopSeller/TopSellerOne';
 import Collections from '../components/Collections/Collections';
-import Explore from '../components/Explore/ExploreOne';
-import Work from '../components/Work/Work';
-import Footer from '../components/Footer/Footer';
-import ModalSearch from '../components/Modal/ModalSearch';
-import ModalMenu from '../components/Modal/ModalMenu';
-import Scrollup from '../components/Scrollup/Scrollup';
+
 import { ExportAccountSelectorContextProvider } from '../contexts/WalletSelectorExportContext';
 import ExploreThree from '../components/Explore/ExploreThree';
 import { useSelector } from 'react-redux';
@@ -64,10 +57,6 @@ const ThemeOne = () => {
 
       <ExploreThree tokens={tokens} />
       {/* <Work /> */}
-      <Footer />
-      <ModalSearch />
-      <ModalMenu />
-      <Scrollup />
     </div>
   );
 };

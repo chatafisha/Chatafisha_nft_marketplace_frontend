@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
-import ItemDetail from '../components/ItemDetails/ItemDetail';
-import LiveAuctions from '../components/Auctions/AuctionsThree';
-import Footer from '../components/Footer/Footer';
-import ModalSearch from '../components/Modal/ModalSearch';
-import ModalMenu from '../components/Modal/ModalMenu';
-import Scrollup from '../components/Scrollup/Scrollup';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -175,10 +169,6 @@ const ItemDetails = () => {
         </div>
       </section>
       {/* <LiveAuctions /> */}
-      <Footer />
-      <ModalSearch />
-      <ModalMenu />
-      <Scrollup />
     </div>
   );
 };
