@@ -55,6 +55,51 @@ const ItemDetails = () => {
     },
   });
 
+  const formatKey = (key) => {
+    return key
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
+  const FormatDescription = () => {
+    const pairs = (nft?.description ?? '')
+      .split('\n')
+      .reduce((accumulator, currentPair) => {
+        const [key, ...value] = currentPair.split(': ');
+        accumulator.push({ key, value: value.join(': ') });
+        return accumulator;
+      }, []);
+
+    return (
+      <div>
+        {pairs.map(({ key, value }, index) => {
+          if (!value) {
+            return;
+          }
+          const isLink = value?.includes('https://');
+          return (
+            <div className="my-1" key={index}>
+              <strong>{formatKey(key)}:</strong>{' '}
+              {isLink ? (
+                <a
+                  className="owner-meta d-flex align-items-center"
+                  key={value}
+                  href={value}
+                  target="_blank"
+                >
+                  <span className="text-truncate">{value}</span>
+                </a>
+              ) : (
+                value
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <div className="main">
       <Breadcrumb title="Item Details" subpage="Explore" page="Item Details" />
@@ -85,23 +130,24 @@ const ItemDetails = () => {
             </div>
             <div className="col-12 col-lg-6">
               {/* Content */}
-              <div className="content mt-5 mt-lg-0">
+              <div className="content mt-2 mt-lg-0">
                 <h3 className="m-0">{nft?.name}</h3>
-                <p>{nft?.description}</p>
+                <FormatDescription />
                 {/* Owner */}
                 <div className="owner d-flex align-items-center">
-                  <span>Owned By</span>
+                  <strong>Owned By</strong>
                   <a
-                    className="owner-meta d-flex align-items-center"
+                    className="owner-meta"
                     key={nft?.accountid}
-                    href=""
+                    href={`https://nearblocks.io/address/${nft?.accountid}`}
+                    target="_blank"
                   >
-                    <h6 className="ml-2">{nft?.accountid}</h6>
+                    <span className="ml-1">{nft?.accountid}</span>
                   </a>
                 </div>
                 {/* Item Info List */}
 
-                <div className="item-info-list mt-4">
+                <div className="item-info-list mt-2">
                   <ul className="list-unstyled">
                     <li className="price d-flex justify-content-between">
                       <strong>Type Of Waste : {nft?.typeofwaste}</strong>
