@@ -92,35 +92,35 @@ const ItemDetails = () => {
                 <div className="owner d-flex align-items-center">
                   <span>Owned By</span>
                   <a
-                    className="owner-meta d-flex align-items-center ml-3"
-                    key={nft?.owner_id}
+                    className="owner-meta d-flex align-items-center"
+                    key={nft?.accountid}
                     href=""
                   >
-                    <h6 className="ml-2">{nft?.owner_id}</h6>
+                    <h6 className="ml-2">{nft?.accountid}</h6>
                   </a>
                 </div>
                 {/* Item Info List */}
-                {nft && (
-                  <div className="item-info-list mt-4">
-                    <ul className="list-unstyled">
-                      <li className="price d-flex justify-content-between">
-                        <strong>Type Of Waste : {nft.typeofwaste}</strong>
-                        {/* <span>{initData.price_2}</span>
+
+                <div className="item-info-list mt-4">
+                  <ul className="list-unstyled">
+                    <li className="price d-flex justify-content-between">
+                      <strong>Type Of Waste : {nft?.typeofwaste}</strong>
+                      {/* <span>{initData.price_2}</span>
                         <span>{initData.count}</span> */}
-                      </li>
-                      <li>
-                        <strong>kilograms : </strong>
-                        <span>{nft.kgs} kg</span>
-                      </li>
-                      <li>
-                        <strong>Image Proof : </strong>
-                        <div className="item-thumb text-center">
-                          <img src={nft.image} alt="" />
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                )}
+                    </li>
+                    <li>
+                      <strong>kilograms : </strong>
+                      <span>{nft?.kgs} kg</span>
+                    </li>
+                    <li>
+                      <strong>Image Proof : </strong>
+                      <div className="item-thumb text-center">
+                        <img src={nft?.image} alt="" />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
                 {/*
                  <div className="item-info-list mt-4">
                     <ul className="list-unstyled">
@@ -139,7 +139,7 @@ const ItemDetails = () => {
                       </li>
                     </ul>
                   </div> */}
-                {nft?.owner_id == userAccountId && (
+                {userAccountId && nft?.accountid == userAccountId && (
                   <form
                     onSubmit={formikTransfer.handleSubmit}
                     className="item-form card no-hover"

@@ -35,7 +35,10 @@ const NFTS = () => {
         (item.email &&
           item.email.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-    setFilteredCollections(filteredData);
+    const sortedItems = filteredData
+      .slice()
+      .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    setFilteredCollections(sortedItems);
   }, [collections, searchTerm]); // Re-run the effect when collections or searchTerm changes
 
   // Pagination logic
@@ -45,9 +48,6 @@ const NFTS = () => {
     indexOfFirstItem,
     indexOfLastItem
   );
-  const sortedItems = currentItems
-    .slice() // Create a shallow copy of the array to avoid mutating the original array
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -79,7 +79,7 @@ const NFTS = () => {
             </tr>
           </thead>
           <tbody>
-            {sortedItems.map((item) => (
+            {currentItems.map((item) => (
               <tr key={item.code} className={styles.tr}>
                 <td className={styles.td}>{item.code}</td>
                 <td className={styles.td}>{item.name}</td>

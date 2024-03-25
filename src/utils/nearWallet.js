@@ -251,7 +251,6 @@ export class Wallet {
         },
         receiver_id: studentAddress,
       },
-      deposit: '100000000000000000000000',
       gas: '300000000000000',
     });
   }

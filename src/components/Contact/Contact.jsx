@@ -175,6 +175,11 @@ const Contact = () => {
               <p>{initData.content}</p>
             </div>
             {/* Item Form */}
+            {!userAccountId && (
+              <div class="alert alert-danger" role="alert">
+                Please connect your wallet to submit your claim.
+              </div>
+            )}
             <form
               id="contact-form"
               className="item-form card no-hover"
@@ -327,6 +332,7 @@ const Contact = () => {
                             <div className="input-group-append ">
                               <button
                                 className="btn btn-primary "
+                                disabled={!userAccountId}
                                 type="submit"
                                 style={{ borderRadius: '8px' }}
                               >
