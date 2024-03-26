@@ -15,6 +15,7 @@ const Contact = () => {
   const [isOtherChecked, setIsOtherChecked] = useState(false);
   const [img, setImg] = useState('');
   const [image, setImage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleUploadImage = async (e) => {
     const file = e.target.files[0];
@@ -89,7 +90,7 @@ const Contact = () => {
         form.appendChild(input);
       }
     }
-
+    console.log(data, form);
     document.body.appendChild(form);
 
     emailjs.sendForm(serviceId, templateId, form).then(
@@ -115,8 +116,8 @@ const Contact = () => {
       date: '',
     },
     onSubmit: async (values, actions) => {
+      setLoading(true);
       const code = await generateUniqueID();
-
       const nftData = new FormData();
       nftData.append('code', code);
       nftData.append('image', image);
@@ -146,11 +147,13 @@ const Contact = () => {
           )
           .then(async (res) => {
             console.log(res.data);
-            await sendEmail(res.data); // get the image uploaded URL
+            await sendEmail(res.data.data); // get the image uploaded URL
+            setLoading(false);
             toast.success('Data submitted successfully!');
           })
           .catch((err) => {
             console.log(err);
+            setLoading(false);
             toast.error('Data submission failed!');
           });
       } catch (err) {
@@ -332,7 +335,7 @@ const Contact = () => {
                             <div className="input-group-append ">
                               <button
                                 className="btn btn-primary "
-                                disabled={!userAccountId}
+                                disabled={!userAccountId || loading}
                                 type="submit"
                                 style={{ borderRadius: '8px' }}
                               >
