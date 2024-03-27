@@ -236,7 +236,8 @@ export class Wallet {
     assetDescription,
     assetUrl,
     assetCollection,
-    studentAddress,
+    accountId,
+    emailAddr,
   }) {
     return await this.callMethod({
       contractId: marketContractName,
@@ -248,8 +249,9 @@ export class Wallet {
           title: assetTitle,
           description: assetDescription,
           media: assetUrl,
+          email: emailAddr,
         },
-        receiver_id: studentAddress,
+        receiver_id: accountId,
       },
       gas: '300000000000000',
     });

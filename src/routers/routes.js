@@ -16,6 +16,7 @@ import Footer from '../components/Footer/Footer';
 import ModalSearch from '../components/Modal/ModalSearch';
 import ModalMenu from '../components/Modal/ModalMenu';
 import Scrollup from '../components/Scrollup/Scrollup';
+import SucessMint from '../pages/SuccessMintPage';
 
 const Wrapper = ({ children }) => {
   return (
@@ -127,6 +128,15 @@ const MyRoutes = () => {
                   </Wrapper>
                 }
               />
+            }
+          />
+          <Route
+            exact
+            path="/success-mint"
+            element={
+              <Wrapper>
+                <SucessMint />
+              </Wrapper>
             }
           />
         </Routes>

@@ -4,9 +4,13 @@ import AuthorProfile from '../AuthorProfile/AuthorProfile';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { wallet } from '../..';
+import { useLocation } from 'react-router-dom';
 
 function Create() {
   const [collections, setCollections] = useState([]);
+  const { state } = useLocation();
+  const inputFormData = state?.data;
+
   useEffect(() => {
     const getColls = async () => {
       const colls = await wallet.getCollectionsNames();
@@ -27,15 +31,26 @@ function Create() {
 
   const formikNft = useFormik({
     initialValues: {
-      code: '',
+      code: inputFormData?.code ?? '',
       title: '',
-      url: '',
-      description: '',
-      studentAddress: '',
+      url: inputFormData?.image ?? '',
+      description: inputFormData
+        ? JSON.stringify(
+            {
+              description: inputFormData.description,
+              kgs: inputFormData.kgs,
+              name: inputFormData.name,
+              typeofwaste: inputFormData.typeofwaste,
+            },
+            null,
+            2
+          )
+        : '',
+      accountId: inputFormData?.accountid ?? '',
       collectionName: '',
+      email: inputFormData?.email ?? '',
     },
     onSubmit: (values) => {
-      console.log(values);
       wallet
         .mintNft({
           assetCode: values.code,
@@ -43,30 +58,10 @@ function Create() {
           assetDescription: values.description,
           assetUrl: values.url,
           assetCollection: values.collectionName,
-          studentAddress: values.studentAddress,
+          accountId: values.accountId,
+          emailAddr: values.email,
         })
-        .then(async (res) => {
-          console.log(res);
-          // await axios
-          //   .delete(`http://localhost:5000/nfts/delete/${values.code}`)
-          //   .then((res) => {
-          //     console.log(res.data);
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //   });
-          await axios
-            .put(
-              `https://chatafisha-backend.netlify.app/.netlify/functions/api/update-status/${values.code}`
-            )
-            .then((res) => {
-              console.log(res.data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          handleLinkClick('/create-msg/succeeded');
-        })
+        .then(async (res) => {})
         .catch((err) => {
           handleLinkClick('/create-msg/failed');
         });
@@ -153,7 +148,7 @@ function Create() {
                       placeholder="Description"
                       id="description"
                       cols={30}
-                      rows={3}
+                      rows={9}
                       onChange={formikNft.handleChange}
                       onBlur={formikNft.handleBlur}
                       value={formikNft.values.description}
@@ -165,16 +160,32 @@ function Create() {
                     <input
                       type="text"
                       className="form-control"
-                      name="studentAddress"
-                      id="studentAddress"
+                      name="accountId"
+                      id="accountId"
                       onChange={formikNft.handleChange}
                       onBlur={formikNft.handleBlur}
-                      value={formikNft.values.studentAddress}
+                      value={formikNft.values.accountId}
                       placeholder="Wallet Address"
                       required="required"
                     />
                   </div>
                 </div>
+                <div className="col-12">
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="email"
+                      id="email"
+                      onChange={formikNft.handleChange}
+                      onBlur={formikNft.handleBlur}
+                      value={formikNft.values.email}
+                      placeholder="Email Address"
+                      required="required"
+                    />
+                  </div>
+                </div>
+
                 {/* <div className="col-12 col-md-6">
                                         <div className="form-group">
                                             <input type="text" className="form-control" name="price" placeholder="Item Price" required="required" />

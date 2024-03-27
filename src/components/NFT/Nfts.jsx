@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './styles.module.css';
 import PaginationComponent from '../../common/Pagination';
+import { Link } from 'react-router-dom';
 
 const itemsPerPage = 10; // Number of items to display per page
 
@@ -76,6 +77,7 @@ const NFTS = () => {
               <th className={styles.th}>Date</th>
               <th className={styles.th}>Image</th>
               <th className={styles.th}>Status</th>
+              <th className={styles.th}>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -100,6 +102,14 @@ const NFTS = () => {
                   </div>
                 </td>
                 <td className={styles.td}>{item.status}</td>
+
+                <td className={styles.td}>
+                  {item.status === 'pending' && (
+                    <Link to="/create" state={{ data: item }}>
+                      <div className="fw-bold">Mint NFT</div>
+                    </Link>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

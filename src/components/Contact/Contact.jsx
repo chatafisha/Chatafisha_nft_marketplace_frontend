@@ -74,7 +74,7 @@ const Contact = () => {
 
   const sendEmail = async (data) => {
     const serviceId = process.env.REACT_APP_EMAIL_SERVICE_ID;
-    const templateId = process.env.REACT_APP_EMAIL_TEMPLATE_ID;
+    const templateId = process.env.REACT_APP_EMAIL_CLAIM_TEMPLATE_ID;
     const publicId = process.env.REACT_APP_PUBLIC_KEY;
     emailjs.init(publicId);
     // Create an HTML form element
