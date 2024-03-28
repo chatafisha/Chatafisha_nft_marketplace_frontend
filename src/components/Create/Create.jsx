@@ -33,7 +33,7 @@ function Create() {
     initialValues: {
       code: inputFormData?.code ?? '',
       title: '',
-      url: inputFormData?.image ?? '',
+      url: '',
       description: inputFormData
         ? JSON.stringify(
             {

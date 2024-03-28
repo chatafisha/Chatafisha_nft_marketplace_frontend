@@ -62,12 +62,12 @@ async function fetchTxnDetails({ txnHash, accountId, navigate }) {
         const args = data?.actions[0].FunctionCall.args;
         if (args) {
           const parsedArgs = JSON.parse(atob(args));
-
+          const description = JSON.parse(parsedArgs.description ?? '');
           const email = parsedArgs.token_metadata?.email;
           if (email) {
             await sendEmail({
               code: parsedArgs.token_id,
-              name: parsedArgs.token_metadata.name,
+              name: description?.name ?? 'Our new NFT Owner',
               email: email,
             });
           }
